@@ -35,7 +35,7 @@ jobs:
           sudo npm install -g tough-cookie --unsafe-perm=true --allow-root
           sudo npm install serverless -g
           
-          cd ./UnicomTask-docker/serverless/tencent-scf
+          cd ./serverless/tencent-scf
     #  - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
     #    run: |
     #      if [ $user ]; then sed -i "/variables/a\      user: $user" serverless.yml; fi;
