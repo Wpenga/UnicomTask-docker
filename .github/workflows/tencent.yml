@@ -31,9 +31,9 @@ jobs:
 
       - name: "安装依赖和 serverless 工具"
         run: |
-          sudo npm install
-          sudo npm install -g tough-cookie --unsafe-perm=true --allow-root
-          sudo npm install serverless -g
+         # sudo npm install
+         # sudo npm install -g tough-cookie --unsafe-perm=true --allow-root
+          sudo npm install -g serverless 
           
           
     #  - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
@@ -46,7 +46,29 @@ jobs:
         
       - name: "部署到腾讯云函数"
         run: |
-          cd ./serverless/tencent-scf
+          
+          cp login.py ./serverless
+          cp index.py ./serverless
+          cp notify.py ./serverless
+          cp util.py ./serverless
+          cp requirements.txt ./serverless
+          cp -rfv config ./serverless
+          cp -rfv task ./serverless
+          cd ./serverless
+          
+          pip3 install pip -U
+          pip3 install setuptools -U
+          
+          sed -i '/lxml==4.6.2/d' ./requirements.txt
+          #解压lxml
+          unzip lxml.zip
+          
+          #部署至腾讯云函数
+          #腾讯云函数貌似只有 /tmp 目录能够临时存取文件
+          sed -i "s/.\/log.txt/..\/..\/tmp\/log.txt/g" ./login.py
+          sed -i "s/.\/log.txt/..\/..\/tmp\/log.txt/g" ./notify.py
+          sed -i "s/.\/log.txt/..\/..\/tmp\/log.txt/g" ./index.py
+          echo "开始安装腾讯ServerlessFramework"
           sls deploy --debug
         env:
           STAGE: Action
