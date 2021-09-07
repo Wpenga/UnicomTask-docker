@@ -11,7 +11,7 @@ inputs:
     - timer:
         name: timer-task
         parameters:
-          cronExpression: 0 30 6 * * * *
+          cronExpression: 0 30 7 * * * *
           enable: true
           qualifier: $DEFAULT
   handler: index.main_handler
@@ -23,8 +23,8 @@ inputs:
   runtime: Python3.6
   src: ./src
   timeout: 900
-name: ap-guangzhou_default_unicom-Task
+name: action_unicom-Task
 org: '1257293866'
-stage: dev
+stage: wpeng
 # When using this configuration file for deployment, make sure the file name is "serverless.yml".
 # For more information: https://github.com/serverless-components/tencent-scf/blob/master/docs/configure.md
