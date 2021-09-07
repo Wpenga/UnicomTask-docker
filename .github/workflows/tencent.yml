@@ -68,7 +68,7 @@ jobs:
           sed -i "s/.\/log.txt/..\/..\/tmp\/log.txt/g" ./login.py
           sed -i "s/.\/log.txt/..\/..\/tmp\/log.txt/g" ./notify.py
           sed -i "s/.\/log.txt/..\/..\/tmp\/log.txt/g" ./index.py
-          echo "开始安装腾讯ServerlessFramework"
+          echo "开始部署到云函数"
           sls deploy --debug
         env:
           STAGE: Action
